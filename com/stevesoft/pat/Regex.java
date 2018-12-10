@@ -280,7 +280,7 @@ public class Regex extends RegRes implements FilenameFilter {
         use compile(String s).
          @see com.stevesoft.pat.Regex#compile(java.lang.String)
                  */
-    public Regex() {}
+    public Regex() { }
     /** Create and compile a Regex, but do not throw any exceptions.
         If you wish to have exceptions thrown for syntax errors,
         you must use the Regex(void) constructor to create the
@@ -291,9 +291,7 @@ public class Regex extends RegRes implements FilenameFilter {
          @see com.stevesoft.pat.Regex#compile(java.lang.String)
          */
     public Regex(String s) {
-        try {
-            compile(s);
-        } catch(RegSyntax rs) {}
+        compile(s);
     }
 
     ReplaceRule rep = null;

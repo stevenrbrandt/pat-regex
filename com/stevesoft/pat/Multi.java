@@ -29,6 +29,8 @@ class Multi extends PatternSub {
         @see MultiMin
         */
     public Multi(patInt a,patInt b,Pattern p) throws RegSyntax {
+        if(!a.lessEq(b))
+            throw new RegSyntax("{"+a+","+b+"} is invalid");
         this.a = a;
         this.b = b;
         this.p = p;

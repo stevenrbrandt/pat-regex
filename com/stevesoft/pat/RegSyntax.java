@@ -14,9 +14,9 @@ package com.stevesoft.pat;
 /**
 This type of syntax error is thrown whenever a syntax error
  is encountered in the pattern. It may not be caught directly, as
- it is not in the throws clause of any method.  To detect it, catch
- Throwable, and use instanceof to see if it is a RegSyntax. */
-public class RegSyntax extends Exception {
+ it is not in the throws clause of any method.
+  */
+public class RegSyntax extends RuntimeException {
     RegSyntax() {}
     RegSyntax(String msg) {
         super(msg);
