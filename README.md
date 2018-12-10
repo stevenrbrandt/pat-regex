@@ -1,4 +1,4 @@
 # Index of Documentation</h3>
 
-[docs/quickstart.html](Quick Start)
-[docs/tutorial.html][Tutorial]
+[Quick Start](docs/quickstart.html)
+[Tutorial](docs/tutorial.html)
