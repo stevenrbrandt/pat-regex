@@ -1,0 +1,225 @@
+<html>
+<head>
+
+<title>Tutorial for Regular Expressions in Java, Part 5</title>
+
+<meta name="Custodian" content="Steven Brandt">
+<meta name="Reply-To" content="webmaster@javaregex.com">
+</head>
+<body bgcolor=white vlink="#333399" alink="#333399" link="#333399">
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=top>
+<table border=0 cellpadding=5 cellspacing=0>
+<tr><td bgcolor="#99ccff" background="bg.jpg">&nbsp;</td>
+    <td valign=top>
+  <h1>Regular Expressions in Java</h1>
+  <font color="#333399">
+    <h2>Package com.stevesoft.pat version 1.5</h2>
+  </font>
+</td></tr>
+<tr><td bgcolor="#bbbbbb"
+  valign=top background="bg.jpg" width=108>
+  <font size=2>
+    <p>
+    <a href="http://javaregex.com/cgi-bin/pat/home.asp">Home</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/articles.asp">Articles/Links</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/raves.asp">Comments/Raves</a></br>
+    <a href="http://javaregex.com/cgi-bin/pat/new.asp">New in 1.5</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/agame.asp">A Game</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/test.asp">An Online Test</a><br>
+    <a >Questions</a><br>
+    <p>
+    <a href="http://javaregex.com/cgi-bin/pat/copyright.asp">Copyright/License</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/download.asp">Download</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/register.asp">Buy</a><br>
+    <p>
+    <i>Online help...</i><br>
+    <a href="quickstart.html">Quick Start</a><br>
+    <a href="tutorial.html">Tutorial Part 1</a><br>
+    <a href="tutorial2.html">Tutorial Part 2</a><br>
+    <a href="tutorial3.html">Tutorial Part 3</a><br>
+    <a href="tutorial4.html">Tutorial Part 4</a><br>
+    <a href="tutorial5.html">Tutorial Part 5</a><br>
+    <a href="tutorial6.html">Tutorial Part 6</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/examples.asp">Examples</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/support.asp">Support</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/faq.asp">FAQ</a><br>
+    <a href="javadoc/index.html">Documentation</a><br>
+    </ul>
+    <p>
+    <i>Useful apps...</i><br>
+    <a href="http://javaregex.com/cgi-bin/pat/jbeaut.asp">Java Beautifier</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/java2html.asp">Code Colorizer</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/guigrep.asp">GUI Grep</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/swgrep.asp">Swing Grep</a><br>
+<img width=108 height=1 src="bg.jpg" border=0></font></td>
+<td valign=top width=500>
+
+<center>
+<h3>Tutorial Part 5</h3>
+<h3>Replacing Text</h3>
+</center>
+Up until now we have focused on how to write a pattern
+to match something.  However, Regex's can also be used to
+replace text.  Here is an example of a Regex being used
+to change "foo" to "bar".
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"foo"</font><b>,</b><font color=0000ff>"bar"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceFirst<b>(</b><font color=0000ff>"foo and foo again!"</font><b>)</b><b>)</b>;
+<font color=000088>// prints "bar and foo again!"</font>
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceAll<b>(</b><font color=0000ff>"foo and foo again!"</font><b>)</b><b>)</b>;
+<font color=000088>// prints "bar and bar again!"</font>
+</pre></td></tr></table></center>
+The second argument to the constructor of Regex is the
+<i>replacement rule.</i>  Like the pattern itself, the
+replacement rule has some special syntax.  The sequence
+"$&" refers to the current match.  So, to put square
+brackets around either the word "foo" or "bar" all we need
+to do is this:
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?:foo|bar)"</font><b>,</b><font color=0000ff>"[$&amp;]"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceAll<b>(</b><font color=0000ff>"foo or bar"</font><b>)</b><b>)</b>;
+<font color=000088>// prints "[foo] or [bar]"</font>
+</pre></td></tr></table></center>
+In the replacement rule, the square brackets are just literal
+text with no special meaning.  All the special bits of text
+for replacement rules will begin with either a $ or a \
+unlike the patterns which had a wider variety of special characters.
+<p>
+Note that the replacement rule will work the same way if we had
+written it as "[${&}]", or "[$MATCH]", or even "[${MATCH}]".
+Putting the {}'s in allows you to specify more exactly which characters
+you intend to name the replacment rule, and one is allowed to use
+"MATCH" instead of "&" simply because some people think that an
+English word is easier to read than a symbol like "&".  (I can't
+think why)
+<p>
+The next trick you might be interested in learning is how to refer
+to a backreference in a replacement rule.  The following rule makes
+sure that there are white spaces around a "+" sign.
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(\\S)\\+(\\S)"</font><b>,</b><font color=0000ff>"${1} + ${2}"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceAll<b>(</b><font color=0000ff>"3+4=7, 2+5=7, 1 + 6=7"</font><b>)</b><b>)</b>;
+<font color=000088>// prints "3 + 4=7, 2 + 5=7, 1 + 6=7"</font>
+</pre></td></tr></table></center>
+The pattern "\\S", as you may recall, matches anything that is not
+a space.  Thus, the pattern will match inside the String two times,
+the first time it matches on "3+4", the first backreference is "3",
+and the second backreference is "4".  The second time it matches,
+it matches on "2+5" with "2" in the first backrefence and "5" in
+the second.  Note: Instead of "${1}" one can use "$1" or "\\1" to refer
+to the backreference.
+<p>
+Probably less interesting but still quite useful,
+is the use of "$`" or "$PREMATCH"
+to refer the part of the pattern to the left of a match.  Likewise,
+the replacement rule "$'" or "$POSTMATCH" can be use to refer to
+the portion of the String to the right of a match.  In the next
+example we use this rule to reverse the order of words in a String.
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\s+and\\s+"</font><b>,</b><font color=0000ff>"$POSTMATCH and $PREMATCH"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceAll<b>(</b><font color=0000ff>"foo  and     bar"</font><b>)</b><b>)</b>;
+<font color=000088>// prints "bar and foo"</font>
+</pre></td></tr></table></center>
+As you will remember, "\\s" matches on a white space (i.e. space, tab,
+carriage return, or line feed characters), and "\\s+" matches
+on one or more white space characters.
+<p>
+Another point of interest concerns the sequences "\\U", "\\L",
+"\\u", "\\l", "\\Q", and "\\E".  All characters are upper case after
+the \U, all are lower case after the \L, and all non-alpha numeric
+characters are quoted after \Q.  The \E flag puts everything back to
+normal.
+<p>
+Here's an example of how you can make words 2 or more letters in length
+upper case.
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\w{2,}"</font><b>,</b><font color=0000ff>"\\U$&amp;"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceAll<b>(</b><font color=0000ff>"a foo and a bar"</font><b>)</b><b>)</b>;
+<font color=000088>// Prints a FOO AND a BAR</font>
+</pre></td></tr></table></center>
+Here's a silly modification that uses \E
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\w{2,}"</font><b>,</b><font color=0000ff>"\\U$&amp;\\E$&amp;"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceAll<b>(</b><font color=0000ff>"a foo and a bar"</font><b>)</b><b>)</b>;
+<font color=000088>// Prints a FOOfoo ANDand a BARbar</font>
+</pre></td></tr></table></center>
+Now, let's consider the the effects of \u and \l.  These cause
+the next letter to be upper or lower case respectively, and they
+over-ride \U and \L.  Thus
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\w{2,}"</font><b>,</b><font color=0000ff>"\\L\\u$&amp;"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceAll<b>(</b><font color=0000ff>"a foo and a BAR"</font><b>)</b><b>)</b>;
+<font color=000088>// Prints a Foo And a Bar</font>
+</pre></td></tr></table></center>
+This last replacement rule capitolizes a word.
+<p>
+<a name="mflag"></a>
+Note that the patterns ^ and $ are affected by the m flag.
+If the m flag is turned on (include "(?m)" at the start of the
+pattern), then we are in "line mode" and ^ and $ will detected
+the end/beginning of lines not just the entire string.
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>null</b></font>;
+
+<font color=000088>// m flag on</font>
+r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?m)^"</font><b>,</b><font color=0000ff>"[start]"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceAll<b>(</b><font color=0000ff>"a\nb\nc"</font><b>)</b><b>)</b>;
+<font color=000088>/* Prints:
+  [start]a
+  [start]b
+  [start]c
+  */</font>
+
+<font color=000088>// m flag off</font>
+r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"^"</font><b>,</b><font color=0000ff>"[start]"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceAll<b>(</b><font color=0000ff>"a\nb\nc"</font><b>)</b><b>)</b>;
+<font color=000088>/* Prints:
+  [start]a
+  b
+  c
+  */</font>
+
+<font color=000088>// m flag on</font>
+r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?m)$"</font><b>,</b><font color=0000ff>"[end]"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceAll<b>(</b><font color=0000ff>"a\nb\nc"</font><b>)</b><b>)</b>;
+<font color=000088>/* Prints:
+  a[end]
+  b[end]
+  c[end]
+  */</font>
+
+<font color=000088>// m flag off</font>
+r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"$"</font><b>,</b><font color=0000ff>"[end]"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>replaceAll<b>(</b><font color=0000ff>"a\nb\nc"</font><b>)</b><b>)</b>;
+<font color=000088>/* Prints:
+  a
+  b
+  c[end]
+  */</font>
+</pre></td></tr></table></center>
+The patterns "\Z" and "\A" are unaffected.  They will always
+match the end and beginning of the string, respectively.
+<p>
+One other sort of thing you can do in Perl 5 is to allow a
+subroutine to process your substitutions.  For those of you
+who know perl, I'm referring to code like the following:
+<pre>
+       $x = "Some numbers: 49 36 2";
+       $x =~ s/\d+/sqrt($&)/eg;
+       print $x,"\n";
+</pre>
+The output from this perl code is:
+<pre>
+       Some numbers: 7 6 1.4142135623731
+</pre>
+The "e" flag allows you to use a function (in this case sqrt)
+to perform the substitution rule.  Package pat does not support
+the "e" flag, for that would entail writing the entire perl language
+in java and not just doing regular expression matching.  However,
+what it does do is allow you to have a java subroutine handle
+the matching.  This example file <a href="http://javaregex.com/cgi-bin/pat//code/fancy.java.html">
+fancy.java</a> illustrates how this can be accomplished.
+<hr><a href="tutorial4.html">Previous</a>
+<a href="tutorial6.html">Next</a>
+
+</td></tr>
+</table></td>
+<td valign=top><a href="http://javaregex.com/cgi-bin/pat/patfull.asp"><img
+  border=0
+  src="pat.jpg"></a></td></tr>
+</table>
+</body>
+</html>

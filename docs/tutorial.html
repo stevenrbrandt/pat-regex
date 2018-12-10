@@ -1,0 +1,323 @@
+<html>
+<head>
+
+<title>Tutorial</title>
+
+<meta name="Custodian" content="Steven Brandt">
+<meta name="Reply-To" content="webmaster@javaregex.com">
+</head>
+<body bgcolor=white vlink="#333399" alink="#333399" link="#333399">
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=top>
+<table border=0 cellpadding=5 cellspacing=0>
+<tr><td bgcolor="#99ccff" background="bg.jpg">&nbsp;</td>
+    <td valign=top>
+  <h1>Regular Expressions in Java</h1>
+  <font color="#333399">
+    <h2>Package com.stevesoft.pat version 1.5</h2>
+  </font>
+</td></tr>
+<tr><td bgcolor="#bbbbbb"
+  valign=top background="bg.jpg" width=108>
+  <font size=2>
+    <p>
+    <a href="http://javaregex.com/cgi-bin/pat/home.asp">Home</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/articles.asp">Articles/Links</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/raves.asp">Comments/Raves</a></br>
+    <a href="http://javaregex.com/cgi-bin/pat/new.asp">New in 1.5</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/agame.asp">A Game</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/test.asp">An Online Test</a><br>
+    <a >Questions</a><br>
+    <p>
+    <a href="http://javaregex.com/cgi-bin/pat/copyright.asp">Copyright/License</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/download.asp">Download</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/register.asp">Buy</a><br>
+    <p>
+    <i>Online help...</i><br>
+    <a href="quickstart.html">Quick Start</a><br>
+    <a href="tutorial.html">Tutorial Part 1</a><br>
+    <a href="tutorial2.html">Tutorial Part 2</a><br>
+    <a href="tutorial3.html">Tutorial Part 3</a><br>
+    <a href="tutorial4.html">Tutorial Part 4</a><br>
+    <a href="tutorial5.html">Tutorial Part 5</a><br>
+    <a href="tutorial6.html">Tutorial Part 6</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/examples.asp">Examples</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/support.asp">Support</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/faq.asp">FAQ</a><br>
+    <a href="javadoc/index.html">Documentation</a><br>
+    </ul>
+    <p>
+    <i>Useful apps...</i><br>
+    <a href="http://javaregex.com/cgi-bin/pat/jbeaut.asp">Java Beautifier</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/java2html.asp">Code Colorizer</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/guigrep.asp">GUI Grep</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/swgrep.asp">Swing Grep</a><br>
+<img width=108 height=1 src="bg.jpg" border=0></font></td>
+<td valign=top width=500>
+
+<h3>Tutorial Part 1</h3>
+<h3>Basic Pattern Elements:</h3>
+<h3>[], {}, *, +, ?, (?i)</h3>
+<h3>\w, \s, \d, \W, \S, \D</h3>
+</center>
+Regular expressions are a valuable tool by which one can process text.
+The most basic regular expression is a literal text string (all the
+alphabetic and numeric characters will be interpreted literally).  We can
+find the word "shells" in a String as follows:
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre><font color=000088>// create a Regex object</font>
+Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"shells"</font><b>)</b>;
+
+<font color=000088>// search for a match within a string</font>
+r<b>.</b>search<b>(</b><font color=0000ff>"She sells sea shells by the sea shore."</font><b>)</b>;
+
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>""</font><b>+</b>r<b>.</b>didMatch<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "true" -- r.didMatch() is a boolean function</font>
+<font color=000088>// that tells us whether the last search was successful</font>
+<font color=000088>// in finding a pattern.</font>
+
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "shells" -- the part of the String that</font>
+<font color=000088>// matched during the previous search.</font>
+
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>left<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "She sells sea " -- the part of the String</font>
+<font color=000088>// that is to the left of the matching text.</font>
+
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>right<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints " by the sea shore." -- the part of the</font>
+<font color=000088>// String that is to the right of the matching text.</font>
+</pre></td></tr></table></center>
+(Hey, that's really cool, how did you format your java source
+code like that?  It's easy, <a href="http://javaregex.com/cgi-bin/pat/java2html.asp">click here!</a>)
+<p>
+However, the above bit of code does not match if we encounter
+the substring "SHELLS" rather than "shells".
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>r<b>.</b>search<b>(</b><font color=0000ff>"SHE SELLS SEA SHELLS BY THE SEA SHORE."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>""</font><b>+</b>r<b>.</b>didMatch<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "false"</font>
+</pre></td></tr></table></center>
+We can fix this by changing our pattern.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?i)shells"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"SHE SELLS SEA SHELLS BY THE SEA SHORE."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>""</font><b>+</b>r<b>.</b>didMatch<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "true"</font>
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "SHELLS"</font>
+</pre></td></tr></table></center>
+The "(?i)" tells the pattern to ignore the case of
+all letters.  This may be more than you want.  Suppose
+you only want to ignore the case of the first character
+of the word, you only want "Shells" or "shells" to
+match but not "SHELLS".
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"[Ss]hells"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"SHELLS Shells shells"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>
+<font color=000088>// Prints "Shells"</font>
+</pre></td></tr></table></center>
+When Regex sees square brackets, it understands that you
+want to match one of the characters inside them.  Thus,
+"[Ss]" matches either "S" or "s".  This type of pattern
+is, however, has more uses than simply matching two
+cases of a letter.  You can, for example, use it to
+match a digit.  The pattern
+"[0123456789]" does this.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"[012345678]"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"How old are you? I'm 35."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "3"</font>
+</pre></td></tr></table></center>
+This might not really be what we want.  We might want
+to get the number "35" rather than just the "3".  The
+pattern in the square brackets can only match one
+character.  We could simply repeat it, like so:
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"[0123456789][0123456789]"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"How old are you? I'm 35."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "35"</font>
+</pre></td></tr></table></center>
+However, this pattern is not very flexible.  It does
+not match on a String with just one digit.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>r<b>.</b>search<b>(</b><font color=0000ff>"How old are you? I'm only 8."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "null" because no match occurred.</font>
+</pre></td></tr></table></center>
+It also doesn't match on longer integers, thus:
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>r<b>.</b>search<b>(</b><font color=0000ff>"When were you born?  In 1963"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "19"</font>
+</pre></td></tr></table></center>
+If we want something to match one, two, three, or
+four digits we can use a new pattern element.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"[0123456789]{1,4}"</font><b>)</b>;
+
+r<b>.</b>search<b>(</b><font color=0000ff>"How old are you? I'm only 8."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "8"</font>
+
+r<b>.</b>search<b>(</b><font color=0000ff>"How old are you? I'm 35."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "35"</font>
+
+r<b>.</b>search<b>(</b><font color=0000ff>"When were you born? In 1963."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "1963"</font>
+</pre></td></tr></table></center>
+It is important to notice that "{1,}" is hungry.  That is,
+it matches as many times as it can.
+<p>
+It may be that we want don't want to specify
+a maximum number of characters to match.  Perhaps
+we just want to match one or more digits.  We
+can do this by not supplying the second digit to
+the {} pattern element.
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"[0123456789]{1,}"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"What's your favorite number? It's 979834743."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "979834743"</font>
+</pre></td></tr></table></center>
+It may have occurred to you that typing out the
+sequence of digits "[012345789]" is a little awkward.
+Imagine if we wanted to match all the letters of the
+alphabet, we would have to type a rather long string
+indeed.  Fortunately, there is a shorter way to write
+this.  We can specify ranges of
+letters and numbers.  Thus "[0-9]" matches any digit,
+it matches all the characters in the range from 0 to
+9.  We can use "[a-z]" to match any lower case letter.
+We can use "[A-Z]" to match any upper case letter,
+or we can use "[A-Za-z0-9]" to match a character that
+is either an upper case letter, a lower case letter,
+or a digit.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"[A-Z][a-z]{1,}"</font><b>)</b>;
+<font color=000088>// Matches an upper case letter, followed by one or</font>
+<font color=000088>// more lower case letters.</font>
+r<b>.</b>search<b>(</b><font color=0000ff>"What is your name?  My name is Fred."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "What"</font>
+</pre></td></tr></table></center>
+Hmm.  I was really hoping to match "Fred" not "What".
+So, I will just rewrite my pattern.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"[A-VX-Z][a-z]{1,}"</font><b>)</b>;
+<font color=000088>// Matches an upper case letter (excluding W),</font>
+<font color=000088>// followed by one or more lower case letters.</font>
+r<b>.</b>search<b>(</b><font color=0000ff>"What is your name?  My name is Fred."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "My"</font>
+</pre></td></tr></table></center>
+Hmm.  Still not what I wanted.  Let's change
+the pattern again.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"[A-VX-Z][a-z]{2,}"</font><b>)</b>;
+<font color=000088>// Matches an upper case letter (excluding W),</font>
+<font color=000088>// followed by two or more lower case letters.</font>
+r<b>.</b>search<b>(</b><font color=0000ff>"What is your name?  My name is Fred."</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "Fred" -- "My" does not match because</font>
+<font color=000088>// the pattern now requires one capital letter</font>
+<font color=000088>// (that isn't a "W") and at least two lower case</font>
+<font color=000088>// letters.</font>
+</pre></td></tr></table></center>
+Finally, I matched the piece of text I wanted.
+We could also have matched using
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"[A-VX-Z][^ ]{2,}"</font><b>)</b>;
+</pre></td></tr></table></center>
+When a "^" appears as the first character inside []'s
+it negates the pattern.  Thus "[^ ]" matces any
+character other than a space (" "), and "[^0-9]" matches any
+character that is not a digit.
+<p>
+You may be wondering, at this point, if it is possible
+to match against something like "[0-9]" as literal text
+and not as a digit.  The answer, of course, is yes.
+Preceeding a non-alphanumeric character with a "\\"
+(note, this is really only one backslash, but the java
+compiler interprets two backslashes as one when they
+appear inside quotes) causes Regex to interpret
+it as literal text.  (Note: Putting a backslash before an alphanumeric
+character often makes it a special pattern character
+instead of a literal).
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\[0-9]"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"the pattern is [0-9]"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "[0-9]"</font>
+r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"[0-9]"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"the pattern is [0-9]"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "0"</font>
+</pre></td></tr></table></center>
+Now, for a few bits of very useful shorthand.  You
+will want to be farmiliar with them.
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r1<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\w"</font><b>)</b>;
+<font color=000088>// the same as "[0-9A-Za-z_]"</font>
+Regex r2<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\w+"</font><b>)</b>;
+<font color=000088>// the same as "\\w{1,}"</font>
+Regex r3<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\w?"</font><b>)</b>;
+<font color=000088>// the same as "\\w{0,1}</font>
+Regex r4<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\w*"</font><b>)</b>;
+<font color=000088>// the same as "\\w{0,}</font>
+Regex r5<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\w{5}"</font><b>)</b>;
+<font color=000088>// the same as Regex("\\w{5,5}");</font>
+Regex r6<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\s"</font><b>)</b>;
+<font color=000088>// the same as "[ \b\t\n\r]" -- these</font>
+<font color=000088>// are referred to as white space characters.</font>
+Regex r7<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\d"</font><b>)</b>;
+<font color=000088>// the same as "[0-9]" -- a digit</font>
+Regex r8<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\W"</font><b>)</b>;
+<font color=000088>// the same as "[^A-Za-z0-9_]" -- these are</font>
+<font color=000088>// the valid characters for a java variable</font>
+<font color=000088>// name.</font>
+Regex r9<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\D"</font><b>)</b>;
+<font color=000088>// the same as "[^0-9]" -- not a digit</font>
+Regex r10<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\S"</font><b>)</b>;
+<font color=000088>// the same as "[^ \b\r\t\n]"</font>
+Regex r11<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"."</font><b>)</b>;
+<font color=000088>// the same as "[^\n]".  In most cases, this</font>
+<font color=000088>// serves the purpose of matching any character.</font>
+<font color=000088>// The pattern ".*" is a popular way</font>
+<font color=000088>// to match arbitrary regions of text.</font>
+</pre></td></tr></table></center>
+<a name="sflag"></a>
+Since "." doesn't match anything, what does?
+Well, "." can match anything if the s flag is
+enabled.  To enable the s flag, include the
+string "(?s)" in the front of your pattern.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r12<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?s)."</font><b>)</b>;
+<font color=000088>// will match any character</font>
+Regex r13<b>=</b><font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?s)foo:."</font><b>)</b>;
+<font color=000088>// matches on the string "foo:"</font>
+<font color=000088>// followed by any character.</font>
+</pre></td></tr></table></center>
+<b>Review:</b> We became farmiliar with four basic
+pattern elements.  Here they are described briefly
+and a bit more technically.
+<ol>
+<li>Literal text -- Any alphabetic or numeric character,
+or any special character preceded by a backslash.
+Thus, "hello\\$" is literal text.
+<li>Ignore case flag -- This flag is set by including
+the sequence "(?i)" somewhere in the pattern.
+<li>Square Brackets -- A set of characters that can
+match.  Square brackets have either the form "[...]"
+or "[^...]" the latter form is a negation of the
+first.  The region represented by ... is a non-empty
+sequence of either letters "[abc]" (which matches a,
+b, or c) or ranges "[a-dfk-m]" (which matches one of
+the letters a, b, c, d, f, k, l, m).
+<li>Repeated sequences -- "{min,max}" matches between
+min and max of the preceeding pattern element.  Thus
+"x{3,10}" matches "xxx" and "xxxxxxxxxx" but not "xx".
+If there is no maximum number of characters (if you
+want to be able to match an infinite number of the
+preceeding), then simply write nothing for the maximum
+number. "x{3,}" matches three or more x's.
+<ol>
+<hr>
+<a href="tutorial2.html">Next</a>
+
+</td></tr>
+</table></td>
+<td valign=top><a href="http://javaregex.com/cgi-bin/pat/patfull.asp"><img
+  border=0
+  src="pat.jpg"></a></td></tr>
+</table>
+</body>
+</html>

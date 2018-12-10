@@ -1,0 +1,236 @@
+<html>
+<head>
+
+<title>Tutorial for Regular Expressions in Java, Part 2</title>
+
+<meta name="Custodian" content="Steven Brandt">
+<meta name="Reply-To" content="webmaster@javaregex.com">
+</head>
+<body bgcolor=white vlink="#333399" alink="#333399" link="#333399">
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=top>
+<table border=0 cellpadding=5 cellspacing=0>
+<tr><td bgcolor="#99ccff" background="bg.jpg">&nbsp;</td>
+    <td valign=top>
+  <h1>Regular Expressions in Java</h1>
+  <font color="#333399">
+    <h2>Package com.stevesoft.pat version 1.5</h2>
+  </font>
+</td></tr>
+<tr><td bgcolor="#bbbbbb"
+  valign=top background="bg.jpg" width=108>
+  <font size=2>
+    <p>
+    <a href="http://javaregex.com/cgi-bin/pat/home.asp">Home</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/articles.asp">Articles/Links</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/raves.asp">Comments/Raves</a></br>
+    <a href="http://javaregex.com/cgi-bin/pat/new.asp">New in 1.5</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/agame.asp">A Game</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/test.asp">An Online Test</a><br>
+    <a >Questions</a><br>
+    <p>
+    <a href="http://javaregex.com/cgi-bin/pat/copyright.asp">Copyright/License</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/download.asp">Download</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/register.asp">Buy</a><br>
+    <p>
+    <i>Online help...</i><br>
+    <a href="quickstart.html">Quick Start</a><br>
+    <a href="tutorial.html">Tutorial Part 1</a><br>
+    <a href="tutorial2.html">Tutorial Part 2</a><br>
+    <a href="tutorial3.html">Tutorial Part 3</a><br>
+    <a href="tutorial4.html">Tutorial Part 4</a><br>
+    <a href="tutorial5.html">Tutorial Part 5</a><br>
+    <a href="tutorial6.html">Tutorial Part 6</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/examples.asp">Examples</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/support.asp">Support</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/faq.asp">FAQ</a><br>
+    <a href="javadoc/index.html">Documentation</a><br>
+    </ul>
+    <p>
+    <i>Useful apps...</i><br>
+    <a href="http://javaregex.com/cgi-bin/pat/jbeaut.asp">Java Beautifier</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/java2html.asp">Code Colorizer</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/guigrep.asp">GUI Grep</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/swgrep.asp">Swing Grep</a><br>
+<img width=108 height=1 src="bg.jpg" border=0></font></td>
+<td valign=top width=500>
+
+<center>
+<h3>Tutorial Part 2</h3>
+<h3>Pattern Elements:</h3>
+<h3>(), (?:), (?!), (?=)</h3>
+</center>
+You can use parenthesis in a variety of ways.  One way is
+to provide grouping for a set of pattern elements.  In this
+example, "{2,}" applies to the entire subpattern "foo" and
+thus there must be at least a "foofoo" for the pattern to match.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(foo){2,}"</font><b>)</b>;
+
+r<b>.</b>search<b>(</b><font color=0000ff>"foo"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>""</font><b>+</b>r<b>.</b>didMatch<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "false"</font>
+
+r<b>.</b>search<b>(</b><font color=0000ff>"foofoofoo"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "foofoofoo"</font>
+</pre></td></tr></table></center>
+Another use for parenthesis is for pulling out matching subpatterns.
+These subpatterns are called "backreferences."
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"[abc]([def])"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"==&gt; be &lt;=="</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>""</font><b>+</b>r<b>.</b>didMatch<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "true"</font>
+
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "be"</font>
+
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b>1<b>)</b><b>)</b>;
+<font color=000088>// Prints "e"</font>
+<font color=000088>// This is the contents of the first backreference</font>
+</pre></td></tr></table></center>
+Each parenthesis has a number, and the part of the matching string
+that falls within the parenthesis is the part of the backreference
+with that number.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"([abc])([def])"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"==&gt; be &lt;=="</font><b>)</b>;
+
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b>1<b>)</b><b>)</b>;
+<font color=000088>// Prints "b"</font>
+<font color=000088>// This is the contents of the first backreference</font>
+
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b>2<b>)</b><b>)</b>;
+<font color=000088>// Prints "e"</font>
+<font color=000088>// This is the contents of the second backreference</font>
+</pre></td></tr></table></center>
+The backreferences are given numbers according to the
+position of the "(" character in the pattern.  The leftmost
+gets 1, the next one to the right gets 2, and so on.  This
+is especially useful to know if you like to nest backreferences.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(ab(cd))ef"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"==&gt;abcdef&lt;=="</font><b>)</b>;
+
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "abcdef"</font>
+
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b>1<b>)</b><b>)</b>;
+<font color=000088>// Prints "abcd"</font>
+
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b>2<b>)</b><b>)</b>;
+<font color=000088>// Prints "cd"</font>
+</pre></td></tr></table></center>
+Please note how the following patterns
+behave, as it will bring out a few
+subtleties of pattern writing
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(a)+b*"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"==&gt;aaaabbb&lt;=="</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b>1<b>)</b><b>)</b>;
+<font color=000088>// Prints "a"</font>
+<font color=000088>// Note that the subpattern is just the</font>
+<font color=000088>// literal character "a" so that is what</font>
+<font color=000088>// the backreference sees.</font>
+
+r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(a+)b*"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"==&gt;aaaabbb&lt;=="</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b>1<b>)</b><b>)</b>;
+<font color=000088>// Prints "aaaa"</font>
+<font color=000088>// Now the () contains the * as well, so</font>
+<font color=000088>// all the matching a's are returned in</font>
+<font color=000088>// the backreference.</font>
+
+r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"([abc])+"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"==&gt;aaabbbc&lt;=="</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b>1<b>)</b><b>)</b>;
+<font color=000088>// Prints "c"</font>
+<font color=000088>// When you have something of the form (...)*</font>
+<font color=000088>// the backreference returns the last thing</font>
+<font color=000088>// that matched.</font>
+</pre></td></tr></table></center>
+Note: You can also use methods left(1) and right(1) to get
+the text to the left and right of backreference one
+just as you can use the methods left() and right() to
+get the text to the left and right of the entire match.
+<p>
+Another use of parenthesis is to select one of a set
+of patterns.  The character "|" is used to distinguish
+the different patterns.  For example:
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(apple|banana|pear|orange)"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"apple"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>""</font><b>+</b>r<b>.</b>didMatch<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "true"</font>
+r<b>.</b>search<b>(</b><font color=0000ff>"orange"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>""</font><b>+</b>r<b>.</b>didMatch<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "true"</font>
+r<b>.</b>search<b>(</b><font color=0000ff>"grape"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>""</font><b>+</b>r<b>.</b>didMatch<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "false"</font>
+</pre></td></tr></table></center>
+If you just want the grouping ability of ()'s but are
+not interested in getting a backreference it is faster and more
+efficient to use (?:) instead. (By the way, if speed in matching,
+as opposed to compiling, is what you're after, you should
+always call the optimize() method or include "(?o)" near
+the front of your pattern.)
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r1 <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?:foo){2,}"</font><b>)</b>;
+<font color=000088>// is the same as</font>
+Regex r2 <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(foo){2,}"</font><b>)</b>;
+<font color=000088>// except that r1 produces no backreference.</font>
+</pre></td></tr></table></center>
+The pattern (?=) can be used to look ahead in the pattern,
+as it is always a zero-length match.  Otherwise, it behaves
+as (?:).
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?i)foo(?=bar)"</font><b>)</b>;
+
+r<b>.</b>search<b>(</b><font color=0000ff>"Foo or foobar?"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "foo"</font>
+<font color=000088>// Matches on the lower case version of</font>
+<font color=000088>// foo because it is followed by bar -- but</font>
+<font color=000088>// since the match is zero-width "bar" is</font>
+<font color=000088>// not part of the matched string.</font>
+
+r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?i)foo"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"Foo or foobar?"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "Foo"</font>
+</pre></td></tr></table></center>
+
+The pattern element (?!) also provides a lookahead
+functionality with zero-width match -- but only if
+the subpattern fails to match.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?i)foo(?!bar)"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"Foobar or foo?"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "foo"</font>
+<font color=000088>// Cannot match on "Foo" because it is followed</font>
+<font color=000088>// by bar.</font>
+
+r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?i)foo"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"Foobar or foo?"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "Foo"</font>
+</pre></td></tr></table></center>
+<b>Review:</b>
+Parenthesis have three basic functions
+<ul>
+<li>Grouping of patterns
+<li>Producing backreferences
+<li>Selecting one of a set of patterns to match
+<li>(?: ... ) is like ( ... ) except no backreference
+is produced.
+<li>(?= ... ) is like (? ... ) except it produces a
+match of zero width.
+<li>(?! ... ) is like (?= ... ) but it only matches if
+the pattern inside is <em>not</em> found.
+</ul>
+<hr>
+<a href="tutorial.html">Previous</a>
+<a href="tutorial3.html">Next</a>
+
+</td></tr>
+</table></td>
+<td valign=top><a href="http://javaregex.com/cgi-bin/pat/patfull.asp"><img
+  border=0
+  src="pat.jpg"></a></td></tr>
+</table>
+</body>
+</html>

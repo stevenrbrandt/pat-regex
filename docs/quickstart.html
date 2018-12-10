@@ -1,0 +1,168 @@
+<html>
+<head>
+
+<title>Quick Start</title>
+
+<meta name="Custodian" content="Steven Brandt">
+<meta name="Reply-To" content="webmaster@javaregex.com">
+</head>
+<body bgcolor=white vlink="#333399" alink="#333399" link="#333399">
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=top>
+<table border=0 cellpadding=5 cellspacing=0>
+<tr><td bgcolor="#99ccff" background="bg.jpg">&nbsp;</td>
+    <td valign=top>
+  <h1>Regular Expressions in Java</h1>
+  <font color="#333399">
+    <h2>Package com.stevesoft.pat version 1.5</h2>
+  </font>
+</td></tr>
+<tr><td bgcolor="#bbbbbb"
+  valign=top background="bg.jpg" width=108>
+  <font size=2>
+    <p>
+    <a href="http://javaregex.com/cgi-bin/pat/home.asp">Home</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/articles.asp">Articles/Links</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/raves.asp">Comments/Raves</a></br>
+    <a href="http://javaregex.com/cgi-bin/pat/new.asp">New in 1.5</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/agame.asp">A Game</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/test.asp">An Online Test</a><br>
+    <a >Questions</a><br>
+    <p>
+    <a href="http://javaregex.com/cgi-bin/pat/copyright.asp">Copyright/License</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/download.asp">Download</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/register.asp">Buy</a><br>
+    <p>
+    <i>Online help...</i><br>
+    <a href="quickstart.html">Quick Start</a><br>
+    <a href="tutorial.html">Tutorial Part 1</a><br>
+    <a href="tutorial2.html">Tutorial Part 2</a><br>
+    <a href="tutorial3.html">Tutorial Part 3</a><br>
+    <a href="tutorial4.html">Tutorial Part 4</a><br>
+    <a href="tutorial5.html">Tutorial Part 5</a><br>
+    <a href="tutorial6.html">Tutorial Part 6</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/examples.asp">Examples</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/support.asp">Support</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/faq.asp">FAQ</a><br>
+    <a href="javadoc/index.html">Documentation</a><br>
+    </ul>
+    <p>
+    <i>Useful apps...</i><br>
+    <a href="http://javaregex.com/cgi-bin/pat/jbeaut.asp">Java Beautifier</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/java2html.asp">Code Colorizer</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/guigrep.asp">GUI Grep</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/swgrep.asp">Swing Grep</a><br>
+<img width=108 height=1 src="bg.jpg" border=0></font></td>
+<td valign=top width=500>
+
+<h3>Quick Start</h3>
+If you don't know regular expressions, please begin
+by going to the <a href="tutorial.html">tutorial</a>.
+<p>
+If you do know regular expressions, then there are
+just a few things you need to know to get going with
+regular expressions.
+<p>
+To create a regular expression that finds the pattern
+"abc.*def" you simply do one of these:
+<center><!-- made by java2html, see http://javaregex.com --><table  width="70%" border=1 ><tr><td bgcolor=ffffdd><pre>Regex r1 <b>=</b> Regex<b>.</b>perlCode<b>(</b><font color=0000ff>"m/abc.*def/"</font><b>)</b>;
+Regex r2 <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"abc.*def"</font><b>)</b>;
+</pre></td></tr></table></center>
+
+To search for this pattern inside a String you can
+use any of these methods:
+<center><!-- made by java2html, see http://javaregex.com --><table  width="70%" border=1 ><tr><td bgcolor=ffffdd><pre><font color=dd00ff>String</font> s <b>=</b> <font color=0000ff>"hello abc world def!"</font>;
+<font color=0000aa><b>if</b></font><b>(</b>r1<b>.</b>search<b>(</b>s<b>)</b><b>)</b> <b>{</b>
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"The pattern matched."</font><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"The matched substring: "</font><b>+</b>
+    r1<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"The substring that preceeds the match: "</font><b>+</b>
+    r1<b>.</b>left<b>(</b><b>)</b><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"The substring that follows the match: "</font><b>+</b>
+    r1<b>.</b>right<b>(</b><b>)</b><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"The string matched from position="</font><b>+</b>
+    r1<b>.</b>matchedFrom<b>(</b><b>)</b><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"The string matched to postion="</font><b>+</b>
+    r1<b>.</b>matchedTo<b>(</b><b>)</b><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"# of characters matched="</font><b>+</b>
+    r1<b>.</b>charsMatched<b>(</b><b>)</b><b>)</b>;
+<b>}</b> <font color=0000aa><b>else</b></font>
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"The pattern did not match."</font><b>)</b>;
+</pre></td></tr></table></center>
+
+If you are interested in getting at the backreference
+(the part in parenthesis) you can do it with these methods:
+<center><!-- made by java2html, see http://javaregex.com --><table  width="70%" border=1 ><tr><td bgcolor=ffffdd><pre><font color=0000aa><b>if</b></font><b>(</b>r1<b>.</b>didMatch<b>(</b><b>)</b><b>)</b> <b>{</b>
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"The pattern matched."</font><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"number of backrefs="</font><b>+</b>r1<b>.</b>numSubs<b>(</b><b>)</b><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"Backreference 1: "</font><b>+</b>
+    r1<b>.</b>stringMatched<b>(</b>1<b>)</b><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"The substring that preceeds backref 1: "</font><b>+</b>
+    r1<b>.</b>left<b>(</b>1<b>)</b><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"The substring that follows backref 1: "</font><b>+</b>
+    r1<b>.</b>right<b>(</b>1<b>)</b><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"Backref 1 matched from position="</font><b>+</b>
+    r1<b>.</b>matchedFrom<b>(</b>1<b>)</b><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"Backref 1 matched to postion="</font><b>+</b>
+    r1<b>.</b>matchedTo<b>(</b>1<b>)</b><b>)</b>;
+  <font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b><font color=0000ff>"# of characters matched by backref 1="</font><b>+</b>
+    r1<b>.</b>charsMatched<b>(</b>1<b>)</b><b>)</b>;
+<b>}</b> 
+</pre></td></tr></table></center>
+
+If you want to substitute, you can do this:
+<center><!-- made by java2html, see http://javaregex.com --><table  width="70%" border=1 ><tr><td bgcolor=ffffdd><pre><font color=000088>// Regex r3 and r4 are the same.</font>
+Regex r3 <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"foo"</font><b>,</b><font color=0000ff>"bar"</font><b>)</b>;
+Regex r4 <b>=</b> Regex<b>.</b>perlCode<b>(</b><font color=0000ff>"s/foo/bar/"</font><b>)</b>;
+</pre></td></tr></table></center>
+
+To actually substitute the text of a string you just do
+this:
+<center><!-- made by java2html, see http://javaregex.com --><table  width="70%" border=1 ><tr><td bgcolor=ffffdd><pre><font color=dd00ff>String</font> res1 <b>=</b> r3<b>.</b>replaceFirst<b>(</b><font color=0000ff>"foo and foo again"</font><b>)</b>;
+<font color=000088>// res1 contains "bar and foo again"</font>
+
+<font color=dd00ff>String</font> res2 <b>=</b> r3<b>.</b>replaceAll<b>(</b><font color=0000ff>"foo and foo again"</font><b>)</b>;
+<font color=000088>// res2 contains "bar and bar again"</font>
+</pre></td></tr></table></center>
+
+You can use all those substitution patterns you're
+familiar with in the substitution rule, such as
+$&amp;, $1, $', $`, etc.
+<p>
+Do you want your pattern to match faster?  Just call
+the optimize() method.
+
+<center><!-- made by java2html, see http://javaregex.com --><table  width="70%" border=1 ><tr><td bgcolor=ffffdd><pre>r3<b>.</b>optimize<b>(</b><b>)</b>;
+</pre></td></tr></table></center>
+This method will spend extra time trying to make your
+pattern execute faster.
+<p>
+Do you want to match a pattern but ignore case?  Either
+of the standard methods you are familiar with will work.
+<center><!-- made by java2html, see http://javaregex.com --><table  width="70%" border=1 ><tr><td bgcolor=ffffdd><pre><font color=000088>// Both Regex's are the same.</font>
+Regex r5 <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(?i)foo"</font><b>)</b>;
+Regex r6 <b>=</b> Regex<b>.</b>perlCode<b>(</b><font color=0000ff>"m/foo/i"</font><b>)</b>;
+</pre></td></tr></table></center>
+Are you looking for syntax errors in your patterns?
+
+<center><!-- made by java2html, see http://javaregex.com --><table  width="70%" border=1 ><tr><td bgcolor=ffffdd><pre>Regex r7 <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><b>)</b>;
+<font color=0000aa><b>try</b></font> <b>{</b>
+  r7<b>.</b>compile<b>(</b><font color=0000ff>"(foo"</font><b>)</b>;
+<b>}</b> <font color=aaaa00><b>catch</b></font><b>(</b>RegSyntax rs<b>)</b> <b>{</b>
+  <font color=dd00ff>System</font><b>.</b>err<b>.</b>println<b>(</b><font color=0000ff>"Syntax error!"</font><b>)</b>;
+<b>}</b>
+</pre></td></tr></table></center>
+That should get you started.  Please look at the example
+snippets of code, and lastly the javadoc'd information
+to learn more.  It may be, however, that what is presented
+in this quick start will allow you to do everything you
+are interested in.  Happy computing!
+
+</td></tr>
+</table></td>
+<td valign=top><a href="http://javaregex.com/cgi-bin/pat/patfull.asp"><img
+  border=0
+  src="pat.jpg"></a></td></tr>
+</table>
+</body>
+</html>

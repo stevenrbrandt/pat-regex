@@ -1,0 +1,140 @@
+<html>
+<head>
+
+<title>Tutorial for Regular Expressions in Java, Part </title>
+
+<meta name="Custodian" content="Steven Brandt">
+<meta name="Reply-To" content="webmaster@javaregex.com">
+</head>
+<body bgcolor=white vlink="#333399" alink="#333399" link="#333399">
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=top>
+<table border=0 cellpadding=5 cellspacing=0>
+<tr><td bgcolor="#99ccff" background="bg.jpg">&nbsp;</td>
+    <td valign=top>
+  <h1>Regular Expressions in Java</h1>
+  <font color="#333399">
+    <h2>Package com.stevesoft.pat version 1.5</h2>
+  </font>
+</td></tr>
+<tr><td bgcolor="#bbbbbb"
+  valign=top background="bg.jpg" width=108>
+  <font size=2>
+    <p>
+    <a href="http://javaregex.com/cgi-bin/pat/home.asp">Home</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/articles.asp">Articles/Links</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/raves.asp">Comments/Raves</a></br>
+    <a href="http://javaregex.com/cgi-bin/pat/new.asp">New in 1.5</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/agame.asp">A Game</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/test.asp">An Online Test</a><br>
+    <a >Questions</a><br>
+    <p>
+    <a href="http://javaregex.com/cgi-bin/pat/copyright.asp">Copyright/License</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/download.asp">Download</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/register.asp">Buy</a><br>
+    <p>
+    <i>Online help...</i><br>
+    <a href="quickstart.html">Quick Start</a><br>
+    <a href="tutorial.html">Tutorial Part 1</a><br>
+    <a href="tutorial2.html">Tutorial Part 2</a><br>
+    <a href="tutorial3.html">Tutorial Part 3</a><br>
+    <a href="tutorial4.html">Tutorial Part 4</a><br>
+    <a href="tutorial5.html">Tutorial Part 5</a><br>
+    <a href="tutorial6.html">Tutorial Part 6</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/examples.asp">Examples</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/support.asp">Support</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/faq.asp">FAQ</a><br>
+    <a href="javadoc/index.html">Documentation</a><br>
+    </ul>
+    <p>
+    <i>Useful apps...</i><br>
+    <a href="http://javaregex.com/cgi-bin/pat/jbeaut.asp">Java Beautifier</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/java2html.asp">Code Colorizer</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/guigrep.asp">GUI Grep</a><br>
+    <a href="http://javaregex.com/cgi-bin/pat/swgrep.asp">Swing Grep</a><br>
+<img width=108 height=1 src="bg.jpg" border=0></font></td>
+<td valign=top width=500>
+
+<center>
+<h3>Tutorial Part 4</h3>
+<h3>Pattern Elements </h3>
+<h3>{1,}?, (?#), \1, \2, \G</h3>
+</center>
+We only have a few pattern elements left to explore before
+the syntax of Perl 5 is covered.  The first is to follow
+a pattern element such as {2,}, {3,8}, +, *, ? by a question
+mark.  The effect of this is to make the pattern matching less
+hungry, instead of matching the most times it can the pattern
+matcher will attempt to match the fewest number of times it can.
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\d+?"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"36454"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "3"</font>
+
+r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\d*?4"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"36454"</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "364"</font>
+</pre></td></tr></table></center>
+Now suppose you want to match the text between single quotes.
+You would want to use a minimumal match, not a maximal.
+<center><!-- made by java2html, see http://javaregex.com --><table  border=1 width=70% ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"'.*'"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"  'hello' and 'world'  "</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "'hello' and 'world'"</font>
+<font color=000088>// This isn't really what we wanted, we got</font>
+<font color=000088>// the text inside two sets of ''s as well as</font>
+<font color=000088>// some from in between.</font>
+
+r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"'.*?'"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>"  'hello' and 'world' "</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints 'hello'</font>
+</pre></td></tr></table></center>
+But let's get a little more fancy.  Suppose we want
+to match the text between either single or double quotes.
+We can do this as follows
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(['\"]).*?\\1"</font><b>)</b>;
+r<b>.</b>search<b>(</b><font color=0000ff>" 'hello' and 'world' "</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "'hello'"</font>
+
+r<b>.</b>search<b>(</b><font color=0000ff>" \"hello\" and \"world\" "</font><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>stringMatched<b>(</b><b>)</b><b>)</b>;
+<font color=000088>// Prints "\"hello\""</font>
+</pre></td></tr></table></center>
+The "\\1" matches the text contained in the first backreference.
+You can likewise use "\\2" to match the second backreference (if
+you have a second backreference).
+<p>
+If you wish one search to pick up where the last one left off you
+can use the "\G" pattern element.  If the string hasn't been searched
+before, then "\G" matches the beginning of the String.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"\\Gfoo"</font><b>)</b>;
+<font color=dd00ff>String</font> x <b>=</b> <font color=0000ff>"foofoo foo"</font>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>search<b>(</b>x<b>)</b><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>search<b>(</b>x<b>)</b><b>)</b>;
+<font color=dd00ff>System</font><b>.</b>out<b>.</b>println<b>(</b>r<b>.</b>search<b>(</b>x<b>)</b><b>)</b>;
+<font color=000088>// Prints true, true, false.</font>
+</pre></td></tr></table></center>
+<p>
+Finally, you can add comments inside your patterns using the "(?#)"
+notation.  This last pattern is the same as the previous one, it
+just has a comment added.  It works exactly the same, however.
+<center><!-- made by java2html, see http://javaregex.com --><table  width=70% border=1 ><tr><td bgcolor=ffffdd><pre>Regex r <b>=</b> <font color=0000aa><b>new</b></font> Regex<b>(</b><font color=0000ff>"(['\"]).*?\\1(?# I like this pattern)"</font><b>)</b>;
+</pre></td></tr></table></center>
+This completes the set of pattern elements that exist in perl 5.
+<p>
+For a pattern summary table <a href="http://javaregex.com/cgi-bin/pat/pattab.asp">click here.</a>
+<hr>
+<a href="tutorial3.html">Previous</a>
+<a href="tutorial5.html">Next</a>
+
+</td></tr>
+</table></td>
+<td valign=top><a href="http://javaregex.com/cgi-bin/pat/patfull.asp"><img
+  border=0
+  src="pat.jpg"></a></td></tr>
+</table>
+</body>
+</html>
