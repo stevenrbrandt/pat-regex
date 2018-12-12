@@ -16,7 +16,7 @@ This type of syntax error is thrown whenever a syntax error
  is encountered in the pattern. It may not be caught directly, as
  it is not in the throws clause of any method.
   */
-public class RegSyntax extends RuntimeException {
+public class RegSyntax extends Exception {
     RegSyntax() {}
     RegSyntax(String msg) {
         super(msg);

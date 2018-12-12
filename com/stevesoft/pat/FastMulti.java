@@ -24,6 +24,8 @@ class FastMulti extends PatternSub {
     public boolean matchFewest = false;
 
     FastMulti(patInt a,patInt b,Pattern p) throws RegSyntax {
+        if(!a.lessEq(b))
+            throw new RegSyntax("{"+a+","+b+"} is invalid");
         if(p == null) RegSyntaxError.endItAll("Null length pattern "+
                 "followed by *, +, or other Multi.");
         fewestMatches = a;
